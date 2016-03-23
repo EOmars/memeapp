@@ -1,7 +1,6 @@
 
 var canvas;
 var ctx;
- var verTexto;
  var x;
  var y;
  var download;
@@ -9,28 +8,109 @@ var ctx;
  var fileInput;
  var img;
 
-fileInput = document.getElementById('fileInput');
 
 var imagen1= document.getElementById('img1');
 imagen1.addEventListener('click',generarMeme1,false);
 
+var imagen2= document.getElementById('img2');
+imagen2.addEventListener('click',generarMeme2,false);
+
+var imagen3= document.getElementById('img3');
+imagen3.addEventListener('click',generarMeme3,false);
+
+ window.onload = function() {
+
+  var deviceWidth = window.innerWidth;;
+  canvasWidth = Math.min(600, deviceWidth-20);
+  canvasHeight = Math.min(480, deviceWidth-20);
+
+  canvas = document.getElementById('memecanvas');
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+  ctx = canvas.getContext('2d');
+  cargarDefault();  
+}
+
+function cargarDefault(){
+  img = document.getElementById('default-image');
+  ctx.drawImage(img, 0, 0);
+
+  var text ="Hola ke ase?";
+  text = text.toUpperCase();
+
+    ctx.textAlign = 'center';
+    ctx.lineWidth  = 4;
+    ctx.font = '25pt Raleway';
+    ctx.strokeStyle = 'black';
+    ctx.fillStyle = 'white';
+    ctx.lineJoin = 'round';
+
+  wrapText(ctx, text, canvas.width/2, canvas.height - canvas.height/10, canvasWidth-canvasWidth/10, 30);
+}
+
+/**
+* Funcion para generar meme1 
+* Caracteristicas: 
+* Opcion para colocar texto superior
+* Opcion para colocar texto inferior
+**/
 function generarMeme1(){
   img=imagen1;
   document.getElementById('p-texto-superior').style.display="block";
-   ctx.save();
+   
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.drawImage(img, 0, 0);
-
     ctx.restore();
 
-    text = document.getElementById('texto-superior').value;
-    text = text.toUpperCase();
-    wrapText(ctx, text, canvas.width/2, canvas.height - canvas.height/1.1, canvasWidth-canvasWidth/3, 30);
-    pintarTexto();
-    
+    pintarTexto();    
 }
 
+/**
+* Funcion para generar meme2
+* Caracteristicas
+* Solo texto inferior
+**/
+function generarMeme2(){
+  img=imagen2;
+  document.getElementById('p-texto-superior').style.display="none";
+   
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(img, 0, 0);
+    ctx.restore();
+
+    pintarTexto();    
+}
+
+/**
+* Funcion para generar meme3
+* Caracteristicas
+* Texto en minusculas
+**/
+function generarMeme3(){
+  img=imagen3;
+  document.getElementById('p-texto-superior').style.display="block";
+   
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(img, 0, 0);
+    ctx.restore();
+
+  var textoSup=document.getElementById('texto-superior').value;
+  var text = document.getElementById('custom-text').value;
+    //pintamos texto superior
+  wrapText(ctx, textoSup, canvas.width/2, canvas.height - canvas.height/1.09, canvasWidth-canvasWidth/10, 30);
+
+  //pintamos texto inferior 
+  wrapText(ctx, text, canvas.width/2, canvas.height - canvas.height/8, canvasWidth-canvasWidth/10, 30);  
+}
+
+
+
+
+
+fileInput = document.getElementById('fileInput');
 fileInput.addEventListener('change', function(e) {
     
     var reader = new FileReader();
@@ -47,29 +127,24 @@ fileInput.addEventListener('change', function(e) {
 
    }, false);
 
-verTexto = document.getElementById('boton-texto');
-verTexto.addEventListener('click',doTransform,false);
+var verTexto = document.getElementById('boton-texto');
+verTexto.addEventListener('click',pintarTexto,false);
 
- window.onload = function() {
 
-  var deviceWidth = window.innerWidth;;
-  canvasWidth = Math.min(600, deviceWidth-20);
-  canvasHeight = Math.min(480, deviceWidth-20);
 
-  canvas = document.getElementById('memecanvas');
-  canvas.width = canvasWidth;
-  canvas.height = canvasHeight;
-  ctx = canvas.getContext('2d');
-  cargarDefault();
-  pintarTexto();
-}
 
-function cargarDefault(){
-  img = document.getElementById('default-image');
-  ctx.drawImage(img, 0, 0);
-}
+function pintarTexto(){  
 
-function pintarTexto(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0);
+    ctx.restore();
+
+  var textoSup=document.getElementById('texto-superior').value;
+  textoSup=textoSup.toUpperCase();
+  if(document.getElementById('p-texto-superior').style.display=="none"){
+    textoSup="";
+  }
+
   text = document.getElementById('custom-text').value;
   text = text.toUpperCase();
 
@@ -80,7 +155,12 @@ function pintarTexto(){
     ctx.fillStyle = 'white';
     ctx.lineJoin = 'round';
 
-  wrapText(ctx, text, canvas.width/2, canvas.height - canvas.height/5, canvasWidth-canvasWidth/10, 30);
+  //pintamos texto superior
+  wrapText(ctx, textoSup, canvas.width/2, canvas.height - canvas.height/1.09, canvasWidth-canvasWidth/10, 30);
+
+  //pintamos texto inferior 
+  wrapText(ctx, text, canvas.width/2, canvas.height - canvas.height/8, canvasWidth-canvasWidth/10, 30);
+
 }
 
 //descarga
@@ -98,9 +178,7 @@ function downloadCanvas(link, canvasId, filename) {
   function doTransform() {
     ctx.save();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     ctx.drawImage(img, 0, 0);
-
     ctx.restore();
 
     text = document.getElementById('custom-text').value;
