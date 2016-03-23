@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+  <TITLE>Ejemplo meme</TITLE>   
+  <meta charset="UTF-8">
+</HEAD>
+<BODY>
+<!--
+	Hecho a partir de https://mobiforge.com/design-development/html5-mobile-web-canvas#images
+-->
+<h1>Appuntate a generar un meme</h1>
+<img id="img1" src="app_indice.png" height="150" width="150"/>&nbsp;
+<img id="img2" src="sol.png" height="150" width="150"/>&nbsp;
+<img id="img3" src="appuntate.png" height="150" width="150"/>&nbsp; <br /><br />
+
+<p id="p-texto-superior" style="display:none;" >Texto Superior:<input id="texto-superior" type="text" value="memeAppuntate"/><button id="boton-texto-sup">Aceptar</button><br /></p>
+Texto<input id="custom-text" type="text" value="memeAppuntate" /><button id="boton-texto">Aceptar</button><br /><br />
+Cargar imagen: <input id="fileInput" name="imageLoader" type="file" />
+<a href="#" id="download">Descargar png</a><br /><br />
+
+<canvas id="memecanvas" style="border: 1px dashed grey;" width="500" height="500"></canvas><br />
+
+
+
+<p><img id="default-image" class="mfnotransform" style="display: none;" src="img/appuntate.png" alt="" /></p>
+
+<script src="memeScript.js"></script>
+</BODY>
+</HTML>
