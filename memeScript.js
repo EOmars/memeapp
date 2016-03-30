@@ -38,7 +38,6 @@ window.onload=function(){
   var imagen1= document.getElementById('img1');
   imagen1.addEventListener('click',
     function(){
-      document.getElementById('p-texto-inferior').style.display="block";
       img=document.getElementById("img1");
       cargarDefault(ctx,canvas);
     }
@@ -64,7 +63,6 @@ function(){
     );
 
 
->>>>>>> master
 //descarga
 document.getElementById('download').addEventListener('click', function() {
   downloadCanvas(this, 'memecanvas', 'memeAppuntate.png');
