@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <HTML>
 <HEAD>
-  <TITLE>Ejemplo meme</TITLE>   
+  <TITLE>Ejemplo meme</TITLE>
   <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="estilos.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
 </HEAD>
 <BODY>
 <h1>Appuntate a generar un meme</h1>
-<img id="img1" src="app_indice.png" height="150" width="150"/>&nbsp;
-<img id="img2" src="sol.png" height="150" width="150"/>&nbsp;
-<img id="img3" src="appuntate.png" height="150" width="150"/>&nbsp; <br /><br />
 
 <p id="p-texto-superior">
-	Texto Superior:<input id="texto-superior" type="text" value="Escribe algo"/><br />
+	<label>Texto superior</label>
+  <input class="input-text" id="texto-superior" type="text" value="Escribe algo"/>
 </p>
 
 <p id="p-texto-inferior">
-	Texto Inferior:<input id="texto-inferior" type="text" value="memeAppuntate" /><br />
+  <label>Texto inferior</label>
+  <input class="input-text" id="texto-inferior" type="text" value="memeAppuntate" />
 </p>
 
-<a href="#" id="download">Descargar png</a><br /><br />
+<div class="contenedor">
+  <div class="contenedor-canvas">
+      <canvas id="memecanvas" style="border: 1px dashed grey;" width="500" height="500"></canvas><br />
+  </div>
 
-<canvas id="memecanvas" style="border: 1px dashed grey;" width="500" height="500"></canvas><br />
+  <div class="contenedor-imagenes">
+      <img id="img1" src="app_indice.png" height="250" width="250"/>
+      <img id="img2" src="sol.png" height="250" width="250"/>
+      <img id="img3" src="appuntate.png" height="250" width="250"/>
+      <img id="img4" src="comunidad.jpg" height="250" width="250"/>
+  </div>
+</div>
+
+<a href="#" id="download">Descargar png</a>
 
 <p><img id="default-image" style="display: none;" src="appuntate.png" alt="" /></p>
 
 <script src="memeScript.js"></script>
+
+
 </BODY>
 </HTML>
