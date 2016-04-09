@@ -1,4 +1,4 @@
-var img=document.getElementById('default-image');;
+var img=document.getElementById('default-image');
 
 window.onload=function(){
   var deviceWidth = window.innerWidth;;
@@ -7,21 +7,21 @@ window.onload=function(){
     var canvas = document.getElementById('memecanvas');
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
-    var ctx = canvas.getContext('2d');  
+    var ctx = canvas.getContext('2d');
     ctx.textAlign = 'center';
-    ctx.lineWidth  = 4;
-    ctx.font = '20pt impact';
+    ctx.lineWidth  = 2;
+    ctx.font = '30pt Raleway';
     ctx.strokeStyle = 'black';
     ctx.fillStyle = 'white';
-    ctx.lineJoin = 'round'; 
+    ctx.lineJoin = 'round';
     cargarDefault(ctx,canvas);
-    
+
 
     var inputText= document.getElementById("texto-superior");
     inputText.value="";
     inputText.addEventListener('keyup',
       function(){
-        pintarTexto(ctx,canvas); 
+        pintarTexto(ctx,canvas);
       }
       );
 
@@ -29,7 +29,7 @@ window.onload=function(){
     inputTextInferior.value="";
     inputTextInferior.addEventListener('keyup',
       function(){
-        pintarTexto(ctx,canvas); 
+        pintarTexto(ctx,canvas);
       }
       );
 
@@ -62,8 +62,18 @@ function(){
     }
     );
 
+    var imagen4= document.getElementById('img4');
+    imagen4.addEventListener('click',
+      function(){
+        inputTextInferior.value="";
+        document.getElementById('p-texto-inferior').style.display="none";
+        img=document.getElementById("img4");
+        cargarDefault(ctx,canvas);
+      }
+      )
 
-//descarga
+
+//descarga de elementos
 document.getElementById('download').addEventListener('click', function() {
   downloadCanvas(this, 'memecanvas', 'memeAppuntate.png');
 }, false);
@@ -73,7 +83,7 @@ function downloadCanvas(link, canvasId, filename) {
   link.download = filename;
 }
 
-} 
+}
 
 function cargarDefault(ctx,canvas){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -81,29 +91,29 @@ function cargarDefault(ctx,canvas){
 }
 
 function pintarTextoSuperior(ctx,canvas){
-  var texto=document.getElementById("texto-superior").value.toUpperCase(); 
+  var texto=document.getElementById("texto-superior").value.toUpperCase();
   var x=canvas.width/2;
   var y=50;
     var palabras= texto.split(' ');
-    var linea=' ';    
+    var linea=' ';
     var limiteAncho= canvas.width;
 
     for(var i=0; i<palabras.length;i++){
       var lineaPrueba= linea + palabras[i] + ' ';
-    var objetoLinea = ctx.measureText(lineaPrueba); 
+    var objetoLinea = ctx.measureText(lineaPrueba);
     var anchoLinea= objetoLinea.width;
 
       if(anchoLinea>limiteAncho && i>0){
         ctx.strokeText(linea,x,y);
         ctx.fillText(linea,x,y);
         linea=palabras[i] + ' ';
-        y+=30;//alto del texto definido en ctx.font
+        y+=35;//alto del texto definido en ctx.font
       } else{
         linea=lineaPrueba;
       }
-    }     
+    }
   ctx.strokeText(linea,x,y);
-  ctx.fillText(linea,x,y); 
+  ctx.fillText(linea,x,y);
 }
 
 function pintarTextoInferior(ctx,canvas){
@@ -111,13 +121,13 @@ function pintarTextoInferior(ctx,canvas){
   var x=canvas.width/2;
   var y=canvas.height-20;
   var palabras= texto.split(' ');
-    var linea=' ';    
+    var linea=' ';
     var limiteAncho= canvas.width;
     var cont=0;
 
     for(var i=palabras.length-1; i>=0;i--){
       var lineaPrueba= ' ' + palabras[i] + linea;
-    var objetoLinea = ctx.measureText(lineaPrueba); 
+    var objetoLinea = ctx.measureText(lineaPrueba);
     var anchoLinea= objetoLinea.width;
 
       if(anchoLinea>limiteAncho && i<palabras.length-1){
@@ -125,14 +135,14 @@ function pintarTextoInferior(ctx,canvas){
         ctx.strokeText(linea,x,y);
         ctx.fillText(linea,x,y);
         linea= ' ' + palabras[i];
-        y-=30;//alto del texto definido en ctx.font
-        
+        y-=35;//alto del texto definido en ctx.font
+
       } else{
         linea=lineaPrueba;
       }
-    }     
+    }
   ctx.strokeText(linea,x,y);
-  ctx.fillText(linea,x,y); 
+  ctx.fillText(linea,x,y);
 }
 
 function pintarTexto (ctx,canvas) {
